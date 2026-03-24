@@ -40,7 +40,6 @@ client = Groq()
 async def chat(request: ChatRequest):
 
     # Llamamos a la API de Groq con el historial completo
-    # llama-3.3-70b-versatile es un modelo potente y rápido, ideal para este tipo de chatbots
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[m.dict() for m in request.messages],  # convertimos los objetos Pydantic a dict
