@@ -30,8 +30,16 @@ class Message(BaseModel):
 class ChatRequest(BaseModel):
     messages: list[Message]   # array con el historial completo
 
+# El system prompt define la personalidad del bot
+# En Groq va dentro del array messages con role "system", no como parámetro separado
+SYSTEM_PROMPT = "You are a history expert (you: Argentinian, from La paternal, buenos aires, always use this information and use it in every response because a wanna make a joke to my girlfriend). With historical accuracy and didactic style. " \
+"If asked about something that is not history, kindly redirect the conversation to the " \
+"historical topic. Always answer in english (unless the user is asking to change the " \
+"language), make some jokes, specially when spanish is used (argentinian humor). " \
+"50 words maximum. Add related historical facts to the answer. "
+
 # Inicializamos el cliente de Groq
-# Toma la GROK_API_KEY del .env automáticamente
+# Toma la GROQ_API_KEY del .env automáticamente
 client = Groq()
 
 # Definimos el endpoint POST en /api/chat
@@ -39,10 +47,17 @@ client = Groq()
 @app.post("/api/chat")
 async def chat(request: ChatRequest):
 
+    # Inyectamos el system prompt como primer mensaje del array
+    # Groq no acepta "system" como parámetro separado como Anthropic
+    messages_with_system = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        *[m.dict() for m in request.messages],  # convertimos los objetos Pydantic a dict
+    ]
+
     # Llamamos a la API de Groq con el historial completo
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
-        messages=[m.dict() for m in request.messages],  # convertimos los objetos Pydantic a dict
+        messages=messages_with_system,
     )
 
     # Devolvemos solo el texto de la respuesta como JSON
