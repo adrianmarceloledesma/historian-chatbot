@@ -1,81 +1,46 @@
 import { useState, useRef, useEffect } from "react";
 
-// Definimos el tipo Message con TypeScript
-// Así el editor nos avisa si mandamos un role incorrecto
 interface Message {
-  role: "user" | "assistant"; // solo puede ser uno de estos dos valores
+  role: "user" | "assistant";
   content: string;
 }
 
 export default function App() {
-
-  // --- ESTADO ---
-
-  // Historial completo de mensajes. Arranca vacío.
   const [messages, setMessages] = useState<Message[]>([]);
-
-  // Lo que el usuario está escribiendo en el input
   const [input, setInput] = useState("");
-
-  // true mientras esperamos respuesta del backend
   const [loading, setLoading] = useState(false);
-
-  // --- REF ---
-
-  // Referencia al div invisible al final de los mensajes
-  // Lo usamos para hacer scroll automático hacia abajo
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // --- EFECTO ---
-
-  // Se ejecuta cada vez que cambia el array "messages"
-  // Hace scroll suave al último mensaje automáticamente
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // --- FUNCIÓN PRINCIPAL ---
-
   async function handleSend() {
-    // No hacemos nada si el input está vacío o ya hay un request en curso
     if (!input.trim() || loading) return;
 
-    // Creamos el mensaje del usuario
     const userMessage: Message = { role: "user", content: input };
-
-    // Agregamos el mensaje nuevo al historial existente
     const updatedMessages = [...messages, userMessage];
 
-    setMessages(updatedMessages); // actualizamos la UI con el mensaje del user
-    setInput("");                 // limpiamos el input
-    setLoading(true);             // activamos el indicador de carga
+    setMessages(updatedMessages);
+    setInput("");
+    setLoading(true);
 
     try {
-      // Llamamos al backend Python (FastAPI en puerto 8000)
-      // Mandamos el historial COMPLETO para que el bot recuerde la conversación
-        const res = await fetch(import.meta.env.VITE_API_URL || "http://localhost:8000/api/chat", {
+      const res = await fetch(import.meta.env.VITE_API_URL || "http://localhost:8000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: updatedMessages }),
       });
 
-      // Convertimos la respuesta a JSON
       const data = await res.json();
-
-      // Agregamos la respuesta del bot al historial
       setMessages([...updatedMessages, { role: "assistant", content: data.reply }]);
-
     } catch {
-      // Si el backend no responde, mostramos un mensaje de error en el chat
       setMessages([...updatedMessages, { role: "assistant", content: "Error al conectar con el servidor." }]);
-
     } finally {
-      // Siempre desactivamos el loading, tanto en éxito como en error
       setLoading(false);
     }
   }
 
-  // Enviar con Enter (pero no con Shift+Enter, que sería salto de línea)
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -83,76 +48,91 @@ export default function App() {
     }
   }
 
-  // --- RENDER ---
-
   return (
-    // Fondo gris, centrado vertical y horizontal
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-
-      {/* Contenedor principal: blanco, redondeado, sombra, altura fija */}
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg flex flex-col h-[600px]">
-
-        {/* HEADER */}
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h1 className="text-xl font-semibold text-gray-800">Historian Chatbot</h1>
-          <p className="text-sm text-gray-400">Ask me anything about history</p>
+    <div className="min-h-screen flex flex-col">
+      
+      {/* Header - Fixed on mobile */}
+      <header className="sticky top-0 z-10 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 px-4 py-3">
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-2xl">🏛️</span>
+          <h1 className="text-xl font-serif font-bold text-amber-400">The Historian</h1>
+          <span className="text-2xl">📜</span>
         </div>
+      </header>
 
-        {/* ÁREA DE MENSAJES */}
-        {/* flex-1 hace que ocupe todo el espacio disponible entre header y footer */}
-        <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-3">
-
-          {/* Placeholder cuando no hay mensajes todavía */}
+      {/* Main Chat Area */}
+      <main className="flex-1 flex flex-col pb-20">
+        
+        {/* Messages Container */}
+        <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-3">
           {messages.length === 0 && (
-            <p className="text-center text-gray-400 mt-16">
-              Write something to start...
-            </p>
+            <div className="flex-1 flex flex-col items-center justify-center min-h-[50vh] text-center px-4">
+              <div className="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center mb-4">
+                <span className="text-4xl">🏛️</span>
+              </div>
+              <p className="text-gray-300 font-serif text-base">
+                Greetings, traveler. What history shall we explore today?
+              </p>
+              <p className="text-gray-500 text-xs mt-2">
+                Ask about ancient civilizations, famous events, or historical figures
+              </p>
+            </div>
           )}
 
-          {/* Renderizamos cada mensaje */}
           {messages.map((msg, i) => (
             <div
               key={i}
-              className={`max-w-[75%] px-4 py-2 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
-                msg.role === "user"
-                  ? "self-end bg-blue-500 text-white"      // usuario: derecha, azul
-                  : "self-start bg-gray-100 text-gray-800" // bot: izquierda, gris
-              }`}
+              className="message-enter flex"
             >
-              {msg.content}
+              <div
+                className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                  msg.role === "user"
+                    ? "bg-gradient-to-r from-amber-500 to-amber-600 text-gray-900 font-medium"
+                    : "bg-gray-800 text-gray-100 border border-gray-700"
+                }`}
+              >
+                {msg.content}
+              </div>
             </div>
           ))}
 
-          {/* Indicador de "escribiendo..." mientras carga */}
           {loading && (
-            <div className="self-start bg-gray-100 text-gray-400 px-4 py-2 rounded-2xl text-xl tracking-widest">
-              ···
+            <div className="flex justify-start">
+              <div className="bg-gray-800 px-5 py-4 rounded-2xl border border-gray-700">
+                <div className="flex gap-2">
+                  <div className="w-2 h-2 rounded-full bg-amber-400 loading-dot"></div>
+                  <div className="w-2 h-2 rounded-full bg-amber-400 loading-dot"></div>
+                  <div className="w-2 h-2 rounded-full bg-amber-400 loading-dot"></div>
+                </div>
+              </div>
             </div>
           )}
 
-          {/* Div invisible — el scroll automático apunta acá */}
           <div ref={bottomRef} />
         </div>
+      </main>
 
-        {/* INPUT */}
-        <div className="px-6 py-4 border-t border-gray-200 flex gap-3">
+      {/* Input Area - Fixed bottom on mobile */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-sm border-t border-gray-800 px-3 py-3">
+        <div className="flex gap-2 max-w-4xl mx-auto">
           <input
-            className="flex-1 border border-gray-300 rounded-xl px-4 py-2 text-sm outline-none focus:border-blue-400 transition"
+            className="flex-1 bg-gray-800 border border-gray-700 rounded-2xl px-4 py-3 text-gray-100 placeholder-gray-500 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all text-base"
             value={input}
-            onChange={(e) => setInput(e.target.value)} // actualiza el estado con cada tecla
+            onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Write your message..."
-            disabled={loading} // deshabilitado mientras espera respuesta
+            placeholder="Ask about history..."
+            disabled={loading}
           />
           <button
             onClick={handleSend}
             disabled={loading || !input.trim()}
-            className="bg-blue-500 text-white px-5 py-2 rounded-xl text-sm font-medium hover:bg-blue-600 disabled:opacity-40 transition"
+            className="bg-gradient-to-r from-amber-500 to-amber-600 text-gray-900 w-12 h-12 rounded-2xl flex items-center justify-center font-semibold hover:from-amber-400 hover:to-amber-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
-            Send
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
+            </svg>
           </button>
         </div>
-
       </div>
     </div>
   );
