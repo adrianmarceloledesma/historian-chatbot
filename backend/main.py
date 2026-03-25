@@ -16,10 +16,14 @@ app = FastAPI()
 # Sin esto, el browser bloquea las requests por seguridad
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173", "https://historian-chatbot-production.up.railway.app"],
     allow_methods=["*"],   # Permitimos todos los métodos (GET, POST, etc.)
     allow_headers=["*"],   # Permitimos todos los headers
 )
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
 
 # Pydantic define la "forma" del JSON que esperamos recibir
 # Si el frontend manda algo distinto, FastAPI devuelve error automáticamente
