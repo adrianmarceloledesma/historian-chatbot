@@ -16,7 +16,7 @@ app = FastAPI()
 # Sin esto, el browser bloquea las requests por seguridad
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "historian-chatbot-miehzx12y-marcelos-projects-a7a6cc0b.vercel.app"],
+    allow_origins=["http://localhost:5173", "https://historian-chatbot-brown.vercel.app/"],
     allow_methods=["*"],   # Permitimos todos los métodos (GET, POST, etc.)
     allow_headers=["*"],   # Permitimos todos los headers
 )
