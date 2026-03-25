@@ -49,25 +49,25 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-4xl flex flex-col h-[85vh] max-h-[800px]">
+    <div className="min-h-screen flex flex-col items-center justify-center p-0 md:p-8">
+      <div className="w-full max-w-4xl flex flex-col h-[95vh] md:h-[85vh] max-h-[800px]">
         
         {/* Header */}
-        <div className="text-center py-6 px-4">
-          <div className="inline-flex items-center gap-3 mb-2">
-            <span className="text-4xl">🏛️</span>
-            <h1 className="text-3xl md:text-4xl font-serif font-bold text-amber-400 tracking-wide">
+        <div className="text-center py-2 md:py-6 px-4">
+          <div className="inline-flex items-center gap-1 md:gap-3">
+            <span className="text-2xl md:text-4xl">🏛️</span>
+            <h1 className="text-2xl md:text-4xl font-serif font-bold text-amber-400 tracking-wide">
               The Historian
             </h1>
-            <span className="text-4xl">📜</span>
+            <span className="text-2xl md:text-4xl">📜</span>
           </div>
-          <p className="text-gray-400 text-sm md:text-base font-serif italic">
+          <p className="text-gray-400 text-xs md:text-base font-serif italic">
             Your AI companion through the ages
           </p>
         </div>
 
         {/* Chat Container */}
-        <div className="flex-1 bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-700/50 shadow-2xl flex flex-col overflow-hidden">
+        <div className="flex-1 mt-2 md:mt-0 bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-700/50 shadow-2xl flex flex-col overflow-hidden">
           
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
@@ -118,10 +118,10 @@ export default function App() {
           </div>
 
           {/* Input Area */}
-          <div className="p-4 md:p-5 border-t border-gray-700/50 bg-gray-900/30">
-            <div className="flex gap-3">
+          <div className="p-3 md:p-5 border-t border-gray-700/50 bg-gray-900/30">
+            <div className="flex gap-2 md:gap-3">
               <input
-                className="flex-1 bg-gray-800/80 border border-gray-600/50 rounded-xl px-5 py-3 text-gray-100 placeholder-gray-500 outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20 transition-all"
+                className="flex-1 bg-gray-800/80 border border-gray-600/50 rounded-xl px-4 md:px-5 py-3 text-gray-100 placeholder-gray-500 outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20 transition-all min-w-0"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -131,7 +131,7 @@ export default function App() {
               <button
                 onClick={handleSend}
                 disabled={loading || !input.trim()}
-                className="bg-gradient-to-r from-amber-500 to-amber-600 text-gray-900 px-6 py-3 rounded-xl font-semibold hover:from-amber-400 hover:to-amber-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40"
+                className="bg-gradient-to-r from-amber-500 to-amber-600 text-gray-900 px-3 md:px-6 py-3 rounded-xl font-semibold hover:from-amber-400 hover:to-amber-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 flex-shrink-0"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />

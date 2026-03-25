@@ -79,7 +79,3 @@ historian-chatbot/
     ├── requirements.txt
     └── Procfile
 ```
-
-## Repository
-
-https://github.com/adrianmarceloledesma/historian-chatbot
