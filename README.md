@@ -1,43 +1,37 @@
-# 👋 Hi, I'm Adrian Marcelo Ledesma
+## Featured Project
 
-I'm a **Junior Full Stack Developer** based in Buenos Aires, Argentina, passionate about building modern web applications and learning new technologies.
+An AI-powered chatbot specialized in history, built with React, FastAPI, and Groq.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 **Frontend:**
+
 - React 19 + TypeScript
 - Vite
 - TailwindCSS
 - HTML/CSS
 
 **Backend:**
+
 - Python
 - FastAPI
 
 **Tools:**
+
 - Git
 - GitHub
 - Vercel (Deployment)
 - Railway (Deployment)
 
-## 📚 Currently Learning
-
-- Next.js
-- PostgreSQL
-- Docker
-
-## 🚀 Featured Project
-
-### The Historian Chatbot
-An AI-powered chatbot specialized in history, built with React, FastAPI, and Groq.
-
 **Key Features:**
+
 - Conversational AI powered by Groq (Llama 3.3 70B)
 - Full conversation memory
 - Responsive design (mobile-first)
 - Dark theme with modern UI
 
 **Tech Used:**
+
 ```
 React • TypeScript • Vite • TailwindCSS • FastAPI • Python • Groq API
 ```
@@ -55,4 +49,4 @@ I'm from La Paternal, Buenos Aires, and I love making people laugh with argentin
 
 ---
 
-*Always learning, always building.*
+_Always learning, always building._
