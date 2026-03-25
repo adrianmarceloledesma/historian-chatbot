@@ -43,7 +43,7 @@ SYSTEM_PROMPT = "You are a history expert (you: Argentinian, from La paternal, b
 "50 words maximum. Add related historical facts to the answer. "
 
 # Inicializamos el cliente de Groq
-# Toma la GROQ_API_KEY del .env automáticamente
+# Toma la GROK_API_KEY del .env automáticamente
 client = Groq()
 
 # Definimos el endpoint POST en /api/chat
