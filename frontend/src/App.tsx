@@ -53,7 +53,7 @@ export default function App() {
     try {
       // Llamamos al backend Python (FastAPI en puerto 8000)
       // Mandamos el historial COMPLETO para que el bot recuerde la conversación
-      const res = await fetch("http://localhost:8000/api/chat", {
+        const res = await fetch(import.meta.env.VITE_API_URL || "http://localhost:8000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: updatedMessages }),
