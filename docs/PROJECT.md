@@ -23,7 +23,7 @@ The app allows users to chat with an AI specialized in history, ask questions ab
 - Vite
 - TailwindCSS
 - FastAPI (Python)
-- Groq API (Llama 3.3 70B Versatile)
+- Groq API (GPT OSS 120B)
 - Python
 
 ---
