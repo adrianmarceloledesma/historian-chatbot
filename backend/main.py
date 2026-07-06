@@ -25,6 +25,10 @@ app.add_middleware(
 def health_check():
     return {"status": "ok"}
 
+@app.get("/api/ping")
+def ping():
+    return {"ok": True}
+
 # Pydantic define la "forma" del JSON que esperamos recibir
 # Si el frontend manda algo distinto, FastAPI devuelve error automáticamente
 class Message(BaseModel):

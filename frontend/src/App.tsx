@@ -22,7 +22,7 @@ export default function App() {
       : "http://localhost:8000";
 
     const wakeUp = (): void => {
-      fetch(`${baseUrl}/health`)
+      fetch(`${baseUrl}/api/ping`)
         .then(() => setServerReady(true))
         .catch(() => setTimeout(wakeUp, 5000));
     };
