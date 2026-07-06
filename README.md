@@ -77,6 +77,5 @@ historian-chatbot/
 │   └── vite.config.ts
 └── backend/
     ├── main.py
-    ├── requirements.txt
-    └── Procfile
+    └── requirements.txt
 ```

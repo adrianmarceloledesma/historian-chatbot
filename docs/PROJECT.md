@@ -62,8 +62,7 @@ historian-chatbot/
 ├── backend/
 │   ├── main.py              # FastAPI server
 │   ├── requirements.txt     # Python dependencies
-│   ├── .env                # Environment variables
-│   └── Procfile            # Railway deployment
+│   └── .env                # Environment variables
 ├── frontend/
 │   ├── src/
 │   │   ├── App.tsx        # Main React component

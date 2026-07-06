@@ -2,18 +2,13 @@
 
 @theme {
   --font-serif: 'Playfair Display', Georgia, serif;
-  --font-body: 'Merriweather', Georgia, serif;
   --color-parchment: #f5f0e6;
   --color-parchment-light: #faf6ee;
   --color-parchment-dark: #e8e0d0;
   --color-ink: #2c2416;
   --color-sepia: #8b7355;
-  --color-sepia-light: #b8a88a;
   --color-gold: #a07d15;
   --color-gold-light: #c4a227;
-  --color-wood: #2c1810;
-  --color-wood-light: #3d2113;
-  --color-bronze: #6b5b45;
 }
 
 * {
