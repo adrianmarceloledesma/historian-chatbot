@@ -9,11 +9,25 @@ export default function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [serverReady, setServerReady] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    const baseUrl = import.meta.env.VITE_API_URL
+      ? import.meta.env.VITE_API_URL.replace("/api/chat", "")
+      : "http://localhost:8000";
+
+    const wakeUp = (): void => {
+      fetch(`${baseUrl}/health`)
+        .then(() => setServerReady(true))
+        .catch(() => setTimeout(wakeUp, 5000));
+    };
+    wakeUp();
+  }, []);
 
   async function handleSend() {
     if (!input.trim() || loading) return;
@@ -61,8 +75,15 @@ export default function App() {
             </h1>
             <span className="text-2xl md:text-4xl">📜</span>
           </div>
-          <p className="text-gray-400 text-xs md:text-base font-serif italic">
-            Your AI companion through the ages
+          <p className="text-gray-400 text-xs md:text-base font-serif italic flex items-center justify-center gap-2">
+            {serverReady ? (
+              <>Your AI companion through the ages</>
+            ) : (
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                Warming up the archives...
+              </span>
+            )}
           </p>
         </div>
 
@@ -125,7 +146,7 @@ export default function App() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask about history..."
+                placeholder={serverReady ? "Ask about history..." : "Warming up the server..."}
                 disabled={loading}
               />
               <button
