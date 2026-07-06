@@ -70,11 +70,11 @@ export default function App() {
         {/* Header */}
         <div className="text-center py-3 md:py-5 px-4">
           <div className="inline-flex items-center gap-1.5 md:gap-3">
-            <Landmark className="w-5 h-5 md:w-8 md:h-8 text-gold drop-shadow-sm" />
-            <h1 className="text-xl md:text-3xl font-serif font-bold text-gold tracking-wide" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.35)" }}>
+            <Landmark className="w-5 h-5 md:w-8 md:h-8 text-gold" />
+            <h1 className="text-xl md:text-3xl font-serif font-bold text-gold tracking-wide">
               The Historian
             </h1>
-            <ScrollText className="w-5 h-5 md:w-8 md:h-8 text-gold drop-shadow-sm" />
+            <ScrollText className="w-5 h-5 md:w-8 md:h-8 text-gold" />
           </div>
           <p className="text-sepia text-xs md:text-sm font-serif italic flex items-center justify-center gap-2 mt-1">
             {serverReady ? (
