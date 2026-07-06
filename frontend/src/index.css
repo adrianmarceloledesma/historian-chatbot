@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-body: 'Merriweather', Georgia, serif;
   --color-parchment: #f5f0e6;
   --color-parchment-dark: #e8e0d0;
   --color-ink: #2c2416;
@@ -20,7 +22,7 @@ html, body, #root {
 }
 
 body {
-  font-family: 'Crimson Text', Georgia, serif;
+  font-family: 'Merriweather', Georgia, serif;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   min-height: 100vh;
 }
