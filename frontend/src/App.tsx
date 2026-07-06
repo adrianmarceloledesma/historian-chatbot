@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Landmark, ScrollText, Send } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -69,11 +70,11 @@ export default function App() {
         {/* Header */}
         <div className="text-center py-2 md:py-6 px-4">
           <div className="inline-flex items-center gap-1 md:gap-3">
-            <span className="text-2xl md:text-4xl">🏛️</span>
+            <Landmark className="w-6 h-6 md:w-9 md:h-9 text-amber-400" />
             <h1 className="text-2xl md:text-4xl font-serif font-bold text-amber-400 tracking-wide">
               The Historian
             </h1>
-            <span className="text-2xl md:text-4xl">📜</span>
+            <ScrollText className="w-6 h-6 md:w-9 md:h-9 text-amber-400" />
           </div>
           <p className="text-gray-400 text-xs md:text-base font-serif italic flex items-center justify-center gap-2">
             {serverReady ? (
@@ -95,7 +96,7 @@ export default function App() {
             {messages.length === 0 && (
               <div className="flex-1 flex flex-col items-center justify-center text-center">
                 <div className="w-20 h-20 rounded-full bg-amber-500/10 flex items-center justify-center mb-4">
-                  <span className="text-5xl">🏛️</span>
+                  <Landmark className="w-12 h-12 text-amber-400" />
                 </div>
                 <p className="text-gray-400 font-serif text-lg">
                   Greetings, traveler. What history shall we explore today?
@@ -154,9 +155,7 @@ export default function App() {
                 disabled={loading || !input.trim()}
                 className="bg-gradient-to-r from-amber-500 to-amber-600 text-gray-900 px-3 md:px-6 py-3 rounded-xl font-semibold hover:from-amber-400 hover:to-amber-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 flex-shrink-0"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
-                </svg>
+                <Send className="h-5 w-5" />
               </button>
             </div>
           </div>
