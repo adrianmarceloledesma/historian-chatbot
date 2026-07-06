@@ -69,7 +69,7 @@ export default function App() {
         
         {/* Header */}
         <div className="text-center py-3 md:py-5 px-4">
-          <div className="inline-flex items-center gap-1.5 md:gap-3">
+          <div className="inline-flex items-center gap-1.5 md:gap-3 bg-ink/85 rounded-lg px-4 md:px-6 py-2 md:py-3 shadow-md">
             <Landmark className="w-5 h-5 md:w-8 md:h-8 text-gold" />
             <h1 className="text-xl md:text-3xl font-serif font-bold text-gold tracking-wide">
               The Historian
