@@ -4,11 +4,16 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-body: 'Merriweather', Georgia, serif;
   --color-parchment: #f5f0e6;
+  --color-parchment-light: #faf6ee;
   --color-parchment-dark: #e8e0d0;
   --color-ink: #2c2416;
+  --color-sepia: #8b7355;
+  --color-sepia-light: #b8a88a;
   --color-gold: #c9a227;
   --color-gold-light: #e4c547;
-  --color-sepia: #8b7355;
+  --color-wood: #2c1810;
+  --color-wood-light: #3d2113;
+  --color-bronze: #6b5b45;
 }
 
 * {
@@ -23,7 +28,7 @@ html, body, #root {
 
 body {
   font-family: 'Merriweather', Georgia, serif;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: radial-gradient(ellipse at center, #3d2113 0%, #1a0e07 100%);
   min-height: 100vh;
 }
 
@@ -39,15 +44,6 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes pulse-gold {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(201, 162, 39, 0);
   }
 }
 

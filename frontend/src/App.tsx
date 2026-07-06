@@ -68,40 +68,46 @@ export default function App() {
       <div className="w-full max-w-4xl flex flex-col h-[95vh] md:h-[85vh] max-h-[800px]">
         
         {/* Header */}
-        <div className="text-center py-2 md:py-6 px-4">
-          <div className="inline-flex items-center gap-1 md:gap-3">
-            <Landmark className="w-6 h-6 md:w-9 md:h-9 text-amber-400" />
-            <h1 className="text-2xl md:text-4xl font-serif font-bold text-amber-400 tracking-wide">
+        <div className="text-center py-3 md:py-5 px-4">
+          <div className="inline-flex items-center gap-1.5 md:gap-3">
+            <Landmark className="w-5 h-5 md:w-8 md:h-8 text-gold" />
+            <h1 className="text-xl md:text-3xl font-serif font-bold text-gold tracking-wide">
               The Historian
             </h1>
-            <ScrollText className="w-6 h-6 md:w-9 md:h-9 text-amber-400" />
+            <ScrollText className="w-5 h-5 md:w-8 md:h-8 text-gold" />
           </div>
-          <p className="text-gray-400 text-xs md:text-base font-serif italic flex items-center justify-center gap-2">
+          <p className="text-sepia text-xs md:text-sm font-serif italic flex items-center justify-center gap-2 mt-1">
             {serverReady ? (
               <>Your AI companion through the ages</>
             ) : (
               <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
                 Warming up the archives...
               </span>
             )}
           </p>
+          {/* Decorative divider */}
+          <div className="flex items-center gap-2 mt-2 md:mt-3 px-12 md:px-20">
+            <div className="flex-1 h-px bg-sepia/30" />
+            <div className="w-1 md:w-1.5 h-1 md:h-1.5 rotate-45 bg-gold/60" />
+            <div className="flex-1 h-px bg-sepia/30" />
+          </div>
         </div>
 
         {/* Chat Container */}
-        <div className="flex-1 mt-2 md:mt-0 bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-700/50 shadow-2xl flex flex-col overflow-hidden">
+        <div className="flex-1 bg-parchment rounded-2xl shadow-lg flex flex-col overflow-hidden">
           
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+          <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4">
             {messages.length === 0 && (
-              <div className="flex-1 flex flex-col items-center justify-center text-center">
-                <div className="w-20 h-20 rounded-full bg-amber-500/10 flex items-center justify-center mb-4">
-                  <Landmark className="w-12 h-12 text-amber-400" />
+              <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
+                <div className="w-16 h-16 rounded-full bg-gold/10 flex items-center justify-center mb-4">
+                  <Landmark className="w-9 h-9 text-gold/70" />
                 </div>
-                <p className="text-gray-400 font-serif text-lg">
+                <p className="text-ink font-serif text-lg font-medium">
                   Greetings, traveler. What history shall we explore today?
                 </p>
-                <p className="text-gray-500 text-sm mt-2">
+                <p className="text-sepia text-sm mt-2">
                   Ask me about ancient civilizations, famous events, or historical figures
                 </p>
               </div>
@@ -115,8 +121,8 @@ export default function App() {
                 <div
                   className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm md:text-base leading-relaxed whitespace-pre-wrap ${
                     msg.role === "user"
-                      ? "bg-gradient-to-r from-amber-500 to-amber-600 text-gray-900 font-medium shadow-lg shadow-amber-500/20"
-                      : "bg-gray-800/80 text-gray-100 border border-gray-700/50"
+                      ? "bg-gradient-to-r from-gold to-gold-light text-ink font-medium shadow-md"
+                      : "bg-parchment-light text-ink border border-sepia/20 shadow-sm"
                   }`}
                 >
                   {msg.content}
@@ -126,11 +132,11 @@ export default function App() {
 
             {loading && (
               <div className="flex justify-start">
-                <div className="bg-gray-800/80 px-5 py-4 rounded-2xl border border-gray-700/50">
+                <div className="bg-parchment-light px-5 py-4 rounded-2xl border border-sepia/20">
                   <div className="flex gap-2">
-                    <div className="w-2 h-2 rounded-full bg-amber-400 loading-dot"></div>
-                    <div className="w-2 h-2 rounded-full bg-amber-400 loading-dot"></div>
-                    <div className="w-2 h-2 rounded-full bg-amber-400 loading-dot"></div>
+                    <div className="w-2 h-2 rounded-full bg-sepia loading-dot"></div>
+                    <div className="w-2 h-2 rounded-full bg-sepia loading-dot"></div>
+                    <div className="w-2 h-2 rounded-full bg-sepia loading-dot"></div>
                   </div>
                 </div>
               </div>
@@ -140,20 +146,20 @@ export default function App() {
           </div>
 
           {/* Input Area */}
-          <div className="p-3 md:p-5 border-t border-gray-700/50 bg-gray-900/30">
+          <div className="p-3 md:p-5 border-t border-sepia/20 bg-parchment-dark/50">
             <div className="flex gap-2 md:gap-3">
               <input
-                className="flex-1 bg-gray-800/80 border border-gray-600/50 rounded-xl px-4 md:px-5 py-3 text-gray-100 placeholder-gray-500 outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20 transition-all min-w-0"
+                className="flex-1 bg-parchment-dark border border-sepia/30 rounded-xl px-4 md:px-5 py-3 text-ink placeholder-sepia/60 outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/20 transition-all min-w-0"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder={serverReady ? "Ask about history..." : "Warming up the server..."}
+                placeholder={serverReady ? "Ask about history..." : "Warming up..."}
                 disabled={loading}
               />
               <button
                 onClick={handleSend}
                 disabled={loading || !input.trim()}
-                className="bg-gradient-to-r from-amber-500 to-amber-600 text-gray-900 px-3 md:px-6 py-3 rounded-xl font-semibold hover:from-amber-400 hover:to-amber-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 flex-shrink-0"
+                className="bg-gradient-to-r from-gold to-gold-light text-ink px-3 md:px-6 py-3 rounded-xl font-semibold hover:from-gold-light hover:to-gold disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md flex-shrink-0"
               >
                 <Send className="h-5 w-5" />
               </button>
