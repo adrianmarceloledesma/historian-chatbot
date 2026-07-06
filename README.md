@@ -60,7 +60,7 @@ npm run dev
 
 ## Preview
 
-![alt text](preview-1.png)
+![Preview](preview.png)
 
 ## Live Demo
 

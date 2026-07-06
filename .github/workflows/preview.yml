@@ -1,0 +1,33 @@
+name: Update Preview
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/src/**"
+      - "frontend/index.html"
+      - "frontend/public/**"
+      - "frontend/scripts/**"
+      - ".github/workflows/preview.yml"
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: npx playwright install chromium
+        working-directory: frontend
+      - run: node scripts/screenshot.mjs
+        working-directory: frontend
+      - name: Commit preview
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add preview.png
+          git diff --cached --quiet || git commit -m "Update preview screenshot [skip ci]"
+          git push

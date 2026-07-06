@@ -4,5 +4,3 @@ __pycache__/
 *.pyc
 dist/
 .vercel
-preview.png
-preview-1.png
