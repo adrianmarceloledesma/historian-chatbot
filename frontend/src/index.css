@@ -28,7 +28,7 @@ html, body, #root {
 
 body {
   font-family: 'Merriweather', Georgia, serif;
-  background: radial-gradient(ellipse at center, #3d2113 0%, #1a0e07 100%);
+  background: radial-gradient(ellipse at center, #5c4535 0%, #3d2e1f 100%);
   min-height: 100vh;
 }
 
