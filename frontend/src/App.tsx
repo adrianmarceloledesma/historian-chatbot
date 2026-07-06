@@ -149,7 +149,7 @@ export default function App() {
           <div className="p-3 md:p-5 border-t border-sepia/20 bg-parchment-dark/50">
             <div className="flex gap-2 md:gap-3">
               <input
-                className="flex-1 bg-parchment-dark border border-sepia/30 rounded-xl px-4 md:px-5 py-3 text-ink placeholder-sepia/60 outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/20 transition-all min-w-0"
+                className="flex-1 bg-parchment-dark border border-sepia/30 rounded-xl px-4 md:px-5 py-3 text-ink placeholder-sepia/60 outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/20 transition-all min-w-0 font-serif"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
