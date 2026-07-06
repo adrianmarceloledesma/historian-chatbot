@@ -71,9 +71,9 @@ export default function App() {
         <div className="text-center py-3 md:py-5 px-4">
           <div className="inline-flex items-center gap-1.5 md:gap-3">
             <Landmark className="w-5 h-5 md:w-8 md:h-8 text-gold" />
-            <h1 className="text-xl md:text-3xl font-serif font-bold text-gold tracking-wide">
+            <a href="/" className="text-xl md:text-3xl font-serif font-bold text-gold tracking-wide hover:opacity-80 transition-opacity">
               The Historian
-            </h1>
+            </a>
             <ScrollText className="w-5 h-5 md:w-8 md:h-8 text-gold" />
           </div>
           <p className="text-sepia text-xs md:text-sm font-serif italic flex items-center justify-center gap-2 mt-1">
